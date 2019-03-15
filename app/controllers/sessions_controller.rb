@@ -12,7 +12,9 @@ class SessionsController < ApplicationController
   		render 'new'
   	end
   end
-
+ # i think the issue with this is that there is a *get* request to this
+ # controller, but don't I need to parse the request body, and in order to 
+ # have a body, it needs to be a post request. 
   def create_oath
     user_email = request.env['omniauth.auth'][:info][:email]
     user = User.find_by(email: user_email)
@@ -25,7 +27,6 @@ class SessionsController < ApplicationController
       else
         render 'new'
       end
-    end
   end
 
   def destroy
