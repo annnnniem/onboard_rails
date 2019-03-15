@@ -8,3 +8,5 @@ Rails.application.routes.draw do
    	post '/logout', to: 'sessions#destroy'
    	get '/auth/intercom/callback' => 'sessions#create_oauth'
 end
+
+

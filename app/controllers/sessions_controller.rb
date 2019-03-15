@@ -14,18 +14,7 @@ class SessionsController < ApplicationController
   end
 
   def create_oath
-    user_email = request.env['omniauth.auth'][:info][:email]
-    if User.find_by(email: user_email)
-      user = User.find_by(email: user_email)
-      log_in user
-    else
-      @user = User.new(email: user_email, name: request.env['omniauth.auth'][:info][:name])
-      if user.save? 
-        redirect_to user
-      else
-        render 'new'
-      end
-    end
+    puts request.env['omniauth.auth'][:info][:email]
   end
 
   def destroy
