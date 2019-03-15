@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   	end
   end
 
-  def create_oath
+  def createoath
     render html: "oauthed"
   end
 
