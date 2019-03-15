@@ -13,6 +13,20 @@ class SessionsController < ApplicationController
   	end
   end
 
+  def create_oath
+    user_email = request.env['omniauth.auth'][:info][:email]
+    if User.find_by(email: user_email)
+      user = User.find_by(email: user_email)
+      log_in user
+    else
+      @user = User.new(email: user_email, name: request.env['omniauth.auth'][:info][:name])
+      if user.save? 
+        redirect_to user
+      else
+        render 'new'
+      end
+  end
+
   def destroy
   	log_out
   	IntercomRails::ShutdownHelper::intercom_shutdown_helper(cookies)
